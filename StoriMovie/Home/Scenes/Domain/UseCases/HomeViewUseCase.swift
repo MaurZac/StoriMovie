@@ -16,8 +16,8 @@ final class HomeViewUseCase {
         self.repository = repository
     }
     
-    func fetchTopRated() -> AnyPublisher<[Movie], Error> {
-        return repository.fetchTopRated()
+    func fetchTopRated(page: Int) -> AnyPublisher<[Movie], Error> {
+        return repository.fetchTopRated(page: page)
     }
     
 }

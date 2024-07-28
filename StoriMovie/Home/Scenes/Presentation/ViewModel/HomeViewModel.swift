@@ -19,6 +19,9 @@ final class HomeViewModel: ObservableObject {
     
     private var fetchMovieUseCase: HomeViewUseCase
     private var cancellables = Set<AnyCancellable>()
+    private var currentPage = 1
+    
+    private var isLoading: Bool = false
     
     init(fetchMovieUseCase: HomeViewUseCase) {
         self.fetchMovieUseCase = fetchMovieUseCase
@@ -33,16 +36,21 @@ final class HomeViewModel: ObservableObject {
     }
     
     func loadMovies() {
-        fetchMovieUseCase.fetchTopRated()
-            .sink(receiveCompletion: { completion in
-                if case let .failure(error) = completion {
-                    print("Error fetching popular movies: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] movies in
-                self?.movies = movies
-                self?.filteredMovies = movies
-            })
-            .store(in: &cancellables)
+        guard !isLoading else { return }
+             isLoading = true
+
+             fetchMovieUseCase.fetchTopRated(page: currentPage)
+                 .sink(receiveCompletion: { [weak self] completion in
+                     if case let .failure(error) = completion {
+                         print("Error fetching popular movies: \(error.localizedDescription)")
+                     }
+                     self?.isLoading = false
+                 }, receiveValue: { [weak self] movies in
+                     self?.movies.append(contentsOf: movies)
+                     self?.filteredMovies.append(contentsOf: movies)
+                     self?.currentPage += 1
+                 })
+                 .store(in: &cancellables)
     }
     
     func searchMovies(with query: String) {

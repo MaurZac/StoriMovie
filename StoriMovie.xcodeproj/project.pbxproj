@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C531B7E32C56F3B30021EC06 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531B7E22C56F3B30021EC06 /* WatchListView.swift */; };
+		C531B7E52C56F4430021EC06 /* WatchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531B7E42C56F4430021EC06 /* WatchListViewModel.swift */; };
 		C5B100DD2C519B7C00AFA3A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B100DC2C519B7C00AFA3A1 /* AppDelegate.swift */; };
 		C5B100DF2C519B7C00AFA3A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B100DE2C519B7C00AFA3A1 /* SceneDelegate.swift */; };
 		C5B100E62C519B7D00AFA3A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B100E52C519B7D00AFA3A1 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 		C5B101632C55DB6A00AFA3A1 /* flatory-sans-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5B101602C55DB6A00AFA3A1 /* flatory-sans-regular.ttf */; };
 		C5B101642C55DB6A00AFA3A1 /* flatory-sans-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5B101612C55DB6A00AFA3A1 /* flatory-sans-light.ttf */; };
 		C5B101652C55DB6A00AFA3A1 /* flatory-sans-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5B101622C55DB6A00AFA3A1 /* flatory-sans-bold.ttf */; };
+		C5B101662C56CD7500AFA3A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B100DE2C519B7C00AFA3A1 /* SceneDelegate.swift */; };
+		C5B101692C56D2FC00AFA3A1 /* UIAlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B101682C56D2FC00AFA3A1 /* UIAlertDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C531B7E22C56F3B30021EC06 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
+		C531B7E42C56F4430021EC06 /* WatchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewModel.swift; sourceTree = "<group>"; };
 		C5B100D92C519B7C00AFA3A1 /* StoriMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoriMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B100DC2C519B7C00AFA3A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B100DE2C519B7C00AFA3A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 		C5B101602C55DB6A00AFA3A1 /* flatory-sans-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "flatory-sans-regular.ttf"; sourceTree = "<group>"; };
 		C5B101612C55DB6A00AFA3A1 /* flatory-sans-light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "flatory-sans-light.ttf"; sourceTree = "<group>"; };
 		C5B101622C55DB6A00AFA3A1 /* flatory-sans-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "flatory-sans-bold.ttf"; sourceTree = "<group>"; };
+		C5B101682C56D2FC00AFA3A1 /* UIAlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +125,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C531B7DF2C56F3590021EC06 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C531B7E12C56F3650021EC06 /* ViewModel */,
+				C531B7E02C56F3600021EC06 /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C531B7E02C56F3600021EC06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C531B7E22C56F3B30021EC06 /* WatchListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C531B7E12C56F3650021EC06 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C531B7E42C56F4430021EC06 /* WatchListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C5B100D02C519B7C00AFA3A1 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +227,7 @@
 		C5B1010E2C51A0D300AFA3A1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C5B101672C56D21200AFA3A1 /* UIAlerts */,
 				C5B101182C52E05D00AFA3A1 /* Fonts */,
 				C5B101162C52D1D700AFA3A1 /* Colors.swift */,
 				C5B1011C2C52E2FA00AFA3A1 /* Fonts.swift */,
@@ -408,6 +441,7 @@
 		C5B101492C54B4F400AFA3A1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C531B7DF2C56F3590021EC06 /* Presentation */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -460,6 +494,14 @@
 				C5B1015A2C556DA100AFA3A1 /* ImageCache.swift */,
 			);
 			path = MovieCell;
+			sourceTree = "<group>";
+		};
+		C5B101672C56D21200AFA3A1 /* UIAlerts */ = {
+			isa = PBXGroup;
+			children = (
+				C5B101682C56D2FC00AFA3A1 /* UIAlertDialog.swift */,
+			);
+			path = UIAlerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,11 +651,14 @@
 				C5B101442C549B2800AFA3A1 /* MovieInfoViewModel.swift in Sources */,
 				C5B101352C5461E600AFA3A1 /* HomeTabBarFactory.swift in Sources */,
 				C5B1015B2C556DA100AFA3A1 /* ImageCache.swift in Sources */,
+				C531B7E32C56F3B30021EC06 /* WatchListView.swift in Sources */,
 				C5B100DD2C519B7C00AFA3A1 /* AppDelegate.swift in Sources */,
 				C5B1012F2C54611100AFA3A1 /* HomeTabBarViewModel.swift in Sources */,
 				C5B1011F2C541B1600AFA3A1 /* HomeView.swift in Sources */,
 				C5B100DF2C519B7C00AFA3A1 /* SceneDelegate.swift in Sources */,
+				C531B7E52C56F4430021EC06 /* WatchListViewModel.swift in Sources */,
 				C5B1013B2C54639A00AFA3A1 /* HomeViewFactoryImp.swift in Sources */,
+				C5B101692C56D2FC00AFA3A1 /* UIAlertDialog.swift in Sources */,
 				C5B1012D2C5451DC00AFA3A1 /* HomeTabBarView.swift in Sources */,
 				C5B101522C554EEF00AFA3A1 /* HomeViewUseCase.swift in Sources */,
 				C5B101322C54618E00AFA3A1 /* HomeTabBarCoordinator.swift in Sources */,
@@ -634,6 +679,7 @@
 			files = (
 				C5B100FE2C519B7D00AFA3A1 /* StoriMovieUITests.swift in Sources */,
 				C5B101002C519B7D00AFA3A1 /* StoriMovieUITestsLaunchTests.swift in Sources */,
+				C5B101662C56CD7500AFA3A1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

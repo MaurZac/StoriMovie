@@ -16,6 +16,7 @@ final class HomeView: UIViewController {
     
     private let searchBar = UISearchBar()
     private var tableView: UITableView!
+    private var activityIndicator: UIActivityIndicatorView!
     var coordinator: HomeViewCoordinator?
     private var viewControllerFactory: HomeViewControllerFactory!
     
@@ -25,7 +26,7 @@ final class HomeView: UIViewController {
         let fetchMovieUseCase = HomeViewUseCase(repository: repository)
         viewModel = HomeViewModel(fetchMovieUseCase: fetchMovieUseCase)
         view.isUserInteractionEnabled = true
-       
+        
         setupUI()
         setupBindings()
     }
@@ -36,6 +37,7 @@ final class HomeView: UIViewController {
     }
     
     private func setupUI() {
+        
         view.backgroundColor = .white
         
         let headerLabel = UILabel()
@@ -65,20 +67,22 @@ final class HomeView: UIViewController {
         view.addSubview(searchBar)
         
         let settingsButton = UIButton(type: .system)
-        settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
-        settingsButton.tintColor = .systemBlue
+        settingsButton.setImage(UIImage(systemName: "gear"), for: .normal)
+        settingsButton.tintColor = ColorUtils.mainGreen
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.showsMenuAsPrimaryAction = true
-        let profileAction = UIAction(title: "Perfil") { _ in
+        let profileAction = UIAction(title: "Perfil", image: UIImage(systemName: "person.crop.circle")) { _ in
             
         }
-        let nowPlaying = UIAction(title: "Mas Populares") { _ in
+        let nowPlaying = UIAction(title: "Mas Populares", image: UIImage(systemName: "party.popper")) { _ in
             
         }
-        let logOut = UIAction(title: "Salir") { _ in
-           
+        let logOut = UIAction(title: "Salir", image: UIImage(systemName: "arrowshape.turn.up.right.circle")) { _ in
+            self.coordinator?.presentCustomAlert(image: UIImage(systemName: "exclamationmark.triangle"), title: "¿Salir de tu perfil?", description: "Estas a punto de salir de tu perfil.", firstButtonTitle: "Aceptar", secondButtonTitle: "Cancelar", firstButtonAction: {
+                print("opcion1")
+            }, secondButtonAction: {})
         }
-        settingsButton.menu = UIMenu(title: "Opciones", children: [profileAction, nowPlaying, logOut])
+        settingsButton.menu = UIMenu(title: "", children: [profileAction, nowPlaying, logOut])
         view.addSubview(settingsButton)
         
         tableView = UITableView()
@@ -88,8 +92,14 @@ final class HomeView: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 120
-        
+        tableView.isHidden = true
+        tableView.separatorStyle = .none
         view.addSubview(tableView)
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
         
         NSLayoutConstraint.activate([
             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -40),
@@ -107,15 +117,25 @@ final class HomeView: UIViewController {
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+
         ])
     }
     
     private func setupBindings() {
+        activityIndicator.startAnimating()
+        
         viewModel.$filteredMovies
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.tableView.isHidden = false
+                    self?.activityIndicator.stopAnimating()
+                }
             }
             .store(in: &cancellables)
         
@@ -127,7 +147,6 @@ final class HomeView: UIViewController {
     }
 }
 
-// MARK: - UISearchBarDelegate
 extension HomeView: UISearchBarDelegate, UIScrollViewDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchText = searchText
@@ -138,11 +157,20 @@ extension HomeView: UISearchBarDelegate, UIScrollViewDelegate {
         view.endEditing(true)
     }
     
-    // MARK: - UIScrollViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         lastContentOffset = scrollView.contentOffset.y
         view.endEditing(true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+           let contentOffsetY = scrollView.contentOffset.y
+           let contentHeight = scrollView.contentSize.height
+           let scrollViewHeight = scrollView.frame.size.height
+
+           if contentOffsetY > contentHeight - scrollViewHeight * 1.5 {
+               viewModel.loadMovies()
+           }
+       }
 }
 
 // MARK: - UITableViewDataSource
@@ -154,14 +182,23 @@ extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-          let movie = viewModel.filteredMovies[indexPath.row]
-
-          viewModel.fetchImage(for: movie) { image in
-              let formattedDate = self.viewModel.formatReleaseDate(movie.releaseDate)
-              cell.configure(with: movie, image: image, formattedDate: formattedDate)
-          }
-
-          return cell
+        let movie = viewModel.filteredMovies[indexPath.row]
+        
+        viewModel.fetchImage(for: movie) { image in
+            let formattedDate = self.viewModel.formatReleaseDate(movie.releaseDate)
+            cell.configure(with: movie, image: image, formattedDate: formattedDate)
+        }
+        cell.onShare = { [weak self] in
+            self?.shareMovieDetails(movie: movie)
+        }
+        
+        cell.onAddFavorites = { [weak self] in
+            self?.coordinator?.presentCustomAlert(image: UIImage(systemName: "heart.text.square"), title: "Agregado a favoritos!", description: "Haz agregado esta pelicula a favoritos", firstButtonTitle: "Aceptar", secondButtonTitle: nil, firstButtonAction: {
+                print("agregado a favoritos")
+            }, secondButtonAction: {})
+        }
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -175,5 +212,20 @@ extension HomeView {
     
     func handleMovieSelection(_ movie: Movie) {
         coordinator?.navigateToMovieInfo(movie: movie)
+    }
+}
+
+extension HomeView {
+    func shareMovieDetails(movie: Movie) {
+        let items: [Any] = ["Checate esta peli!: \(movie.title)", URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)")!]
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+
+        if let popoverController = activityController.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        present(activityController, animated: true, completion: nil)
     }
 }

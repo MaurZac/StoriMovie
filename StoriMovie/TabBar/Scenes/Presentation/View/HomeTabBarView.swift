@@ -43,7 +43,6 @@ final class HomeTabBarView: UITabBarController {
     
     private func setupViewControllers() {
         let homeVC = viewControllerFactory.makeHomeViewController(coordinator: coordinator)
-        //let favoriteMovieRepository = FavoriteMovieRepositoryImpl()
         
         let watchList = viewControllerFactory.makeWatchlistViewController()
         viewControllers = [homeVC, watchList]

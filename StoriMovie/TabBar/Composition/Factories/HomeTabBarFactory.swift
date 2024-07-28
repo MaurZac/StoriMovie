@@ -32,7 +32,10 @@ final class HomeTabBarFactoryImp: HomeTabBarFactory {
     }
 
     func makeWatchlistViewController() -> UIViewController {
-        return UIViewController()
+        let watchListViewModel = WatchListViewModel()
+        let WatchListView = WatchListView(viewModel: watchListViewModel)
+        WatchListView.tabBarItem = UITabBarItem(title: "Favoritos", image: UIImage(systemName: "heart"), tag: 0)
+        return WatchListView
     }
        
 }

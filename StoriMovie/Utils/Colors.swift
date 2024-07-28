@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//let viewBackgroundColor = ColorUtils.color1
+
 struct ColorUtils {
     static let mainGreen = UIColor(hex: "#003A40")
     static let secondaryGreen = UIColor(hex: "#336166")

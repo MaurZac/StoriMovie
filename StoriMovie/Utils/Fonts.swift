@@ -12,10 +12,15 @@ extension UIFont {
         static func bold(_ size: CGFloat = 16.0) -> UIFont {
             return UIFont.customFont(fontName: "FlatorySans-700", fontSize: size)
         }
+        
+        static func regular(_ size: CGFloat = 16.0) -> UIFont {
+            return UIFont.customFont(fontName: "FlatorySans-400", fontSize: size)
+        }
 
         static func light(_ size: CGFloat = 16.0) -> UIFont {
             return UIFont.customFont(fontName: "FlatorySans-300", fontSize: size)
         }
+        
     }
     
     private static func customFont(fontName: String, fontSize: CGFloat) -> UIFont {

@@ -9,8 +9,7 @@ import Foundation
 import Combine
 
 protocol HomeViewRepository {
-    func fetchTopRated() -> AnyPublisher<[Movie], Error>
-
+    func fetchTopRated(page:Int) -> AnyPublisher<[Movie], Error>
 }
 
 
