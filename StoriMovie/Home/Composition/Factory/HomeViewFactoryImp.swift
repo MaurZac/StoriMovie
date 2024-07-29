@@ -20,8 +20,10 @@ final class HomeViewFactoryImp: HomeViewControllerFactory {
     }
     
     func makeMovieInfo(movie: Movie) -> MovieInfoView {
+        let factory = HomeTabBarFactoryImp()
+        let coordinator = HomeTabBarCoordinator(navigationController: navigationController, viewControllerFactory: factory)
         let viewModel = MovieInfoViewModel(movie: movie)
-        return MovieInfoView(viewModel: viewModel)
+        return MovieInfoView(viewModel: viewModel, coordinator: coordinator)
     }
     
 }

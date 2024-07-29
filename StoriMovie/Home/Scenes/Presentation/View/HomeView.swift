@@ -62,7 +62,7 @@ final class HomeView: UIViewController {
         searchBar.searchTextField.tintColor = UIColor.white
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.borderStyle = .roundedRect
-        navigationItem.titleView = searchBar
+        //navigationItem.titleView = searchBar
         searchBar.setImage(UIImage(), for: .search, state: .normal)
         view.addSubview(searchBar)
         
@@ -107,11 +107,11 @@ final class HomeView: UIViewController {
             headerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             searchBar.topAnchor.constraint(equalTo: headerLabel.bottomAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: -8),
-            searchBar.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: 5),
+            searchBar.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 8),
+            searchBar.trailingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: -5),
+            
             
             settingsButton.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
-            settingsButton.leadingAnchor.constraint(equalTo: searchBar.trailingAnchor, constant: 6),
             settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
@@ -185,7 +185,7 @@ extension HomeView: UITableViewDataSource, UITableViewDelegate {
         let movie = viewModel.filteredMovies[indexPath.row]
         
         viewModel.fetchImage(for: movie) { image in
-            let formattedDate = self.viewModel.formatReleaseDate(movie.releaseDate)
+            let formattedDate = DateUtils.formatReleaseDate(movie.releaseDate)
             cell.configure(with: movie, image: image, formattedDate: formattedDate)
         }
         cell.onShare = { [weak self] in

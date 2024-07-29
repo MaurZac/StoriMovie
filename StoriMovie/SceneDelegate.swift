@@ -52,6 +52,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       private func transitionToMainApp() {
           let navigationController = UINavigationController()
+          //navigationController.navigationBar.isHidden = true
+
           let viewControllerFactory = HomeTabBarFactoryImp()
           coordinator = HomeTabBarCoordinator(navigationController: navigationController, viewControllerFactory: viewControllerFactory)
           

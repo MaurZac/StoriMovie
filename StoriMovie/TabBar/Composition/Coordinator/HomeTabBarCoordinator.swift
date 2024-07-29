@@ -8,6 +8,7 @@
 import UIKit
 
 final class HomeTabBarCoordinator: Coordinator {
+    
     func presentCustomAlert(image: UIImage?, title: String, description: String, firstButtonTitle: String?, secondButtonTitle: String?, firstButtonAction: (() -> Void)?, secondButtonAction: (() -> Void)?) {
         let customAlertVC = UIAlertDialog(
                 firstButtonTitle: firstButtonTitle,

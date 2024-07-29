@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C531B7E32C56F3B30021EC06 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531B7E22C56F3B30021EC06 /* WatchListView.swift */; };
 		C531B7E52C56F4430021EC06 /* WatchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531B7E42C56F4430021EC06 /* WatchListViewModel.swift */; };
+		C531B7E82C571E820021EC06 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531B7E72C571E820021EC06 /* DateFormatter.swift */; };
 		C5B100DD2C519B7C00AFA3A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B100DC2C519B7C00AFA3A1 /* AppDelegate.swift */; };
 		C5B100DF2C519B7C00AFA3A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B100DE2C519B7C00AFA3A1 /* SceneDelegate.swift */; };
 		C5B100E62C519B7D00AFA3A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5B100E52C519B7D00AFA3A1 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		C531B7E22C56F3B30021EC06 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
 		C531B7E42C56F4430021EC06 /* WatchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewModel.swift; sourceTree = "<group>"; };
+		C531B7E72C571E820021EC06 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		C5B100D92C519B7C00AFA3A1 /* StoriMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoriMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B100DC2C519B7C00AFA3A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B100DE2C519B7C00AFA3A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C531B7E62C571E5F0021EC06 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				C531B7E72C571E820021EC06 /* DateFormatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		C5B100D02C519B7C00AFA3A1 = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +237,7 @@
 		C5B1010E2C51A0D300AFA3A1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C531B7E62C571E5F0021EC06 /* Formatters */,
 				C5B101672C56D21200AFA3A1 /* UIAlerts */,
 				C5B101182C52E05D00AFA3A1 /* Fonts */,
 				C5B101162C52D1D700AFA3A1 /* Colors.swift */,
@@ -652,6 +663,7 @@
 				C5B101352C5461E600AFA3A1 /* HomeTabBarFactory.swift in Sources */,
 				C5B1015B2C556DA100AFA3A1 /* ImageCache.swift in Sources */,
 				C531B7E32C56F3B30021EC06 /* WatchListView.swift in Sources */,
+				C531B7E82C571E820021EC06 /* DateFormatter.swift in Sources */,
 				C5B100DD2C519B7C00AFA3A1 /* AppDelegate.swift in Sources */,
 				C5B1012F2C54611100AFA3A1 /* HomeTabBarViewModel.swift in Sources */,
 				C5B1011F2C541B1600AFA3A1 /* HomeView.swift in Sources */,

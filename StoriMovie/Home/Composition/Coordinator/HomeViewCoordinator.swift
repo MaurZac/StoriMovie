@@ -29,6 +29,7 @@ final class HomeViewCoordinator: Coordinator {
     
     init(navigationController: UINavigationController, viewControllerFactory: HomeViewControllerFactory) {
         self.navigationController = navigationController
+        //navigationController.navigationBar.isHidden = true
         self.viewControllerFactory = viewControllerFactory
     }
     

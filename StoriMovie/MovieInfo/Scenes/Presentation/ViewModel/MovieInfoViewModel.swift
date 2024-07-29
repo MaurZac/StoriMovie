@@ -9,16 +9,14 @@ import UIKit
 import Combine
 
 final class MovieInfoViewModel {
-    // MARK: - Properties
-    let movie: Movie
     
+    let movie: Movie
     @Published var movieTitle: String
     @Published var posterImage: UIImage?
     @Published var overview: String
     @Published var releaseDate: String
     @Published var popularity: Double
-    @Published var starRating: Int
-        
+    
     // MARK: - Init
     init(movie: Movie) {
         self.movie = movie
@@ -26,10 +24,9 @@ final class MovieInfoViewModel {
         self.overview = movie.overview
         self.releaseDate = movie.releaseDate
         self.popularity = movie.popularity
-        self.starRating = MovieInfoViewModel.calculateStarRating(from: movie.popularity)
         let baseUrl = "https://image.tmdb.org/t/p/"
         let size = "original"
-        if let posterPath = movie.posterPath {
+        if let posterPath = movie.backdropPath {
             let fullImageUrlString = "\(baseUrl)\(size)\(posterPath)"
             loadPosterImage(from: fullImageUrlString)
         }
@@ -63,18 +60,5 @@ final class MovieInfoViewModel {
             }
         }.resume()
     }
-    
-    static func calculateStarRating(from popularity: Double) -> Int {
-        let minPopularity: Double = 1.1
-        let maxPopularity: Double = 10000.0
-        let minStars: Double = 1.0
-        let maxStars: Double = 5.0
-        
-        let normalizedPopularity = (popularity - minPopularity) / (maxPopularity - minPopularity)
-        let starRating = normalizedPopularity * (maxStars - minStars) + minStars
-        
-        return Int(round(starRating))
-    }
-    
     
 }
