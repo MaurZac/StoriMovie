@@ -75,11 +75,15 @@ class UIAlertDialog: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         
         containerView.backgroundColor = ColorUtils.white
         containerView.layer.cornerRadius = 20
-        containerView.clipsToBounds = true
+        containerView.clipsToBounds = false
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.4
+        containerView.layer.shadowOffset = CGSize(width: 1, height: 4)
+        containerView.layer.shadowRadius = 10
         
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         closeButton.tintColor = ColorUtils.Olive

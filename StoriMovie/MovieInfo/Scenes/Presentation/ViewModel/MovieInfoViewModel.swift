@@ -16,8 +16,8 @@ final class MovieInfoViewModel {
     @Published var overview: String
     @Published var releaseDate: String
     @Published var popularity: Double
+    @Published var posterMovie: UIImage?
     
-    // MARK: - Init
     init(movie: Movie) {
         self.movie = movie
         self.movieTitle = movie.title
@@ -25,9 +25,14 @@ final class MovieInfoViewModel {
         self.releaseDate = movie.releaseDate
         self.popularity = movie.popularity
         let baseUrl = "https://image.tmdb.org/t/p/"
-        let size = "original"
-        if let posterPath = movie.backdropPath {
+        let size = "w500"
+        if let posterPath = movie.posterPath {
             let fullImageUrlString = "\(baseUrl)\(size)\(posterPath)"
+            loadPosterImage(from: fullImageUrlString)
+        }
+        
+        if let posterPathMovie = movie.posterPath {
+            let fullImageUrlString = "\(baseUrl)\(size)\(posterPathMovie)"
             loadPosterImage(from: fullImageUrlString)
         }
         

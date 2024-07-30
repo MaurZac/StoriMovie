@@ -38,13 +38,13 @@ final class HomeView: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = ColorUtils.Olive
         
         let headerLabel = UILabel()
         headerLabel.text = "Las peliculas mas top"
         headerLabel.textAlignment = .center
         headerLabel.font = UIFont.FlatorySans.bold(20)
-        headerLabel.textColor = ColorUtils.mainGreen
+        headerLabel.textColor = ColorUtils.white
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerLabel)
         
@@ -68,7 +68,7 @@ final class HomeView: UIViewController {
         
         let settingsButton = UIButton(type: .system)
         settingsButton.setImage(UIImage(systemName: "gear"), for: .normal)
-        settingsButton.tintColor = ColorUtils.mainGreen
+        settingsButton.tintColor = ColorUtils.white
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.showsMenuAsPrimaryAction = true
         let profileAction = UIAction(title: "Perfil", image: UIImage(systemName: "person.crop.circle")) { _ in
@@ -173,7 +173,6 @@ extension HomeView: UISearchBarDelegate, UIScrollViewDelegate {
        }
 }
 
-// MARK: - UITableViewDataSource
 extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -207,7 +206,6 @@ extension HomeView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: - Movie Selection Handler
 extension HomeView {
     
     func handleMovieSelection(_ movie: Movie) {

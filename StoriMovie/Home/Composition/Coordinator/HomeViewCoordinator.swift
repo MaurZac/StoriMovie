@@ -42,7 +42,10 @@ final class HomeViewCoordinator: Coordinator {
     func navigateToMovieInfo(movie: Movie) {
         let movieInfoViewModel = MovieInfoViewModel(movie: movie)
         let detailViewController = viewControllerFactory.makeMovieInfo(movie: movie)
-        navigationController.pushViewController(detailViewController, animated: true)
+        detailViewController.modalPresentationStyle = .popover
+        navigationController.present(detailViewController, animated: true)
+        //se modifico navegacion para mostrar en modal para mejor experiencia
+        //navigationController.pushViewController(detailViewController, animated: true)
     }
     
     func presentCustomAlert(image: UIImage?, title: String, description: String, firstButtonTitle: String?, secondButtonTitle: String?, firstButtonAction: (() -> Void)?, secondButtonAction: (() -> Void)?) {

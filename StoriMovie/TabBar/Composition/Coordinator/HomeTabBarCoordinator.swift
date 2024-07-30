@@ -51,8 +51,16 @@ final class HomeTabBarCoordinator: Coordinator {
     }
 
     func navigateToMovieInfo(movie: Movie) {
+        //let movieInfoView = viewControllerFactory.makeMovieInfoViewController(movie: movie)
         let movieInfoView = viewControllerFactory.makeMovieInfoViewController(movie: movie)
-        navigationController.pushViewController(movieInfoView, animated: true)
+              movieInfoView.modalPresentationStyle = .fullScreen // Opcional: configura el estilo de presentación
+
+              if let topViewController = navigationController.topViewController {
+                  topViewController.present(movieInfoView, animated: true, completion: nil)
+              } else {
+                  navigationController.present(movieInfoView, animated: true, completion: nil)
+              }
+
     }
     
     func navigateToMovieInfo() {

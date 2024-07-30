@@ -28,7 +28,7 @@ class MovieCell: UITableViewCell {
     }
     
     private func setupViews() {
-        movieImageView.contentMode = .scaleAspectFill
+        movieImageView.contentMode = .scaleToFill
         movieImageView.clipsToBounds = true
         movieImageView.layer.cornerRadius = 10
         movieImageView.layer.masksToBounds = true
@@ -38,7 +38,7 @@ class MovieCell: UITableViewCell {
         movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         movieTitleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         movieTitleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        movieTitleLabel.font = UIFont.FlatorySans.regular(16)
+        movieTitleLabel.font = UIFont.FlatorySans.regular(18)
         movieTitleLabel.textColor = ColorUtils.secondaryGreen
         contentView.addSubview(movieTitleLabel)
         
@@ -72,8 +72,8 @@ class MovieCell: UITableViewCell {
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             movieImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
-            movieImageView.widthAnchor.constraint(equalToConstant: 140),
-            movieImageView.heightAnchor.constraint(equalToConstant: 80),
+            movieImageView.widthAnchor.constraint(equalToConstant: 180),
+            movieImageView.heightAnchor.constraint(equalToConstant: 110),
             
             movieOptionsBtn.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             movieOptionsBtn.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -85,7 +85,7 @@ class MovieCell: UITableViewCell {
             movieTitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: movieOptionsBtn.leadingAnchor, constant: -10),
             
             dateReleaseLabel.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 10),
-            dateReleaseLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 5),
+            dateReleaseLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: -20),
             dateReleaseLabel.trailingAnchor.constraint(lessThanOrEqualTo: movieOptionsBtn.leadingAnchor, constant: -10),
             
             separatorLine.leadingAnchor.constraint(equalTo: dateReleaseLabel.leadingAnchor),

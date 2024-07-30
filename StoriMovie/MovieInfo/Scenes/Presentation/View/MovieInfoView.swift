@@ -38,12 +38,13 @@ final class MovieInfoView: UIViewController, UIScrollViewDelegate {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+    //se suspende por que la navegacion en modal es mas facil
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
@@ -96,23 +97,33 @@ final class MovieInfoView: UIViewController, UIScrollViewDelegate {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.FlatorySans.regular(12)
-        label.numberOfLines = 0
-        label.tintColor = ColorUtils.Olive
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.FlatorySans.regular(12)
+            label.numberOfLines = 0
+            label.tintColor = ColorUtils.Olive
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+            label.backgroundColor = .clear
+        label.layer.borderColor = ColorUtils.Olive.cgColor
+            label.layer.borderWidth = 1.0
+            label.layer.cornerRadius = 10
+            label.clipsToBounds = true
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let popularity: UILabel = {
         let label = UILabel()
-        label.font = UIFont.FlatorySans.regular(12)
-        label.numberOfLines = 0
-        label.tintColor = ColorUtils.Olive
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.FlatorySans.regular(12)
+            label.numberOfLines = 0
+            label.tintColor = ColorUtils.Olive
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+            label.backgroundColor = .clear
+        label.layer.borderColor = ColorUtils.Olive.cgColor
+            label.layer.borderWidth = 1.0
+            label.layer.cornerRadius = 10
+            label.clipsToBounds = true
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -150,93 +161,72 @@ final class MovieInfoView: UIViewController, UIScrollViewDelegate {
     private func setupUI() {
         view.backgroundColor = ColorUtils.lightGray
 
-        // Add scrollView and contentView to the main view
         view.addSubview(scrollView)
-        view.addSubview(imageView) // ImageView está fuera del scrollView
+        view.addSubview(imageView)
         scrollView.addSubview(contentView)
 
-        // Add subviews to contentView
         contentView.addSubview(movieTitleLabel)
         contentView.addSubview(movieDescriptionLabel)
         contentView.addSubview(favoriteButton)
         contentView.addSubview(dateLabel)
         contentView.addSubview(popularity)
 
-        // Add backButton last so it stays on top
-        view.addSubview(backButton)
+        //view.addSubview(backButton)
 
-        // Configure favoriteButton
-        favoriteButton.titleLabel?.lineBreakMode = .byTruncatingTail // Permite truncar el texto si es muy largo
-        favoriteButton.titleLabel?.adjustsFontSizeToFitWidth = true // Ajusta el tamaño de la fuente para que se ajuste al ancho del botón
-        favoriteButton.titleLabel?.minimumScaleFactor = 0.5 // Escala mínima de la fuente
-        favoriteButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16) // Añade espacio alrededor del texto
+        favoriteButton.titleLabel?.lineBreakMode = .byTruncatingTail
+        favoriteButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        favoriteButton.titleLabel?.minimumScaleFactor = 0.5
+        favoriteButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
 
-        // Setup constraints
         NSLayoutConstraint.activate([
-            // ScrollView constraints
-            scrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor), // Asegura que el scrollView esté justo debajo de la imageView
+            scrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            // ContentView constraints
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            // ImageView constraints
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 300),
+            imageView.heightAnchor.constraint(equalToConstant: 400),
 
-            // BackButton constraints
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
-            backButton.heightAnchor.constraint(equalToConstant: 60),
-            backButton.widthAnchor.constraint(equalToConstant: 60),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+//            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
+//            backButton.heightAnchor.constraint(equalToConstant: 60),
+//            backButton.widthAnchor.constraint(equalToConstant: 60),
+//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
 
-            // MovieTitleLabel constraints
             movieTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             movieTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             movieTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
 
-            // DateLabel constraints
             dateLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 4),
             dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             dateLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -6),
             
-            // Popularity constraints
             popularity.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 4),
             popularity.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 6),
             popularity.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
 
-            // MovieDescriptionLabel constraints
             movieDescriptionLabel.topAnchor.constraint(equalTo: popularity.bottomAnchor, constant: 12),
             movieDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             movieDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             
-            // FavoriteButton constraints
             favoriteButton.topAnchor.constraint(equalTo: movieDescriptionLabel.bottomAnchor, constant: 60),
             favoriteButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             favoriteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 50), // Ajusta la altura si es necesario
-            favoriteButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 200) // Ajusta el ancho si es necesario
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 200)
         ])
         
-        // Update the contentView's bottom constraint to ensure scrolling
         contentView.bottomAnchor.constraint(equalTo: favoriteButton.bottomAnchor, constant: 20).isActive = true
 
-        // Bring backButton to front to ensure it's above all other views
-        view.bringSubviewToFront(backButton)
+        //view.bringSubviewToFront(backButton)
     }
-
-
-
-
-
     
     private func setupBindings() {
         viewModel.$posterImage
